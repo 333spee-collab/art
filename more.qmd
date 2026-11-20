@@ -1,0 +1,46 @@
+---
+title: "More: How Much AI Art Is Being Used"
+execute:
+  echo: false
+  message: false
+  warning: false
+---
+
+```{r}
+library(tidyverse)
+
+twigma_monthly <- read_csv("data/twigma_monthly.csv") |>
+  arrange(month) |>
+  mutate(cumulative_posts = cumsum(ai_art_posts))
+
+artbench_styles <- read_csv("data/artbench_twigma_styles.csv")
+total_twigma_posts <- sum(twigma_monthly$ai_art_posts)
+total_twigma_likes <- sum(twigma_monthly$total_likes)
+total_artbench_ai <- sum(artbench_styles$artbench_ai_art)
+```
+
+## Rapid Growth in AI Art Usage
+
+Across our two datasets, AI art usage grew from a small niche in early 2021 into hundreds of thousands of shared works by early 2023:
+
+- **Social media AI art (TWIGMA):** **`r scales::comma(total_twigma_posts)`** AI-generated art posts tracked in monthly totals from January 2021 through March 2023 (from an overall release of 805,650 images), generating **`r scales::comma(total_twigma_likes)`** total likes. Monthly volume jumped from **789 posts** in January 2021 to **211,851 posts** in March 2023.
+- **Benchmark AI art (AI-ArtBench):** **`r scales::comma(total_artbench_ai)`** AI-generated images (**12,500 per style** across 10 major art movements) produced with Latent Diffusion and Stable Diffusion.
+
+```{r}
+#| label: fig-ai-usage
+#| fig-width: 8
+#| fig-height: 5
+
+twigma_monthly |>
+  ggplot(aes(x = month, y = ai_art_posts)) +
+  geom_col(fill = "#d95f02", alpha = 0.85) +
+  scale_y_continuous(labels = scales::label_comma()) +
+  labs(
+    title = "Monthly AI Art Posts Shared Online (2021–2023)",
+    subtitle = "AI art usage surged following the public release of Stable Diffusion and Midjourney in mid-2022",
+    x = "Month",
+    y = "Monthly AI Art Posts",
+    caption = "Source: TWIGMA Dataset (Zenodo, Jan 2021 – Mar 2023)"
+  ) +
+  theme_minimal(base_size = 12)
+```

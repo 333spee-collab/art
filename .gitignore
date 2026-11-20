@@ -1,0 +1,6 @@
+data/twigma_release.csv
+/.quarto/
+/_site/
+
+/.quarto/
+**/*.quarto_ipynb

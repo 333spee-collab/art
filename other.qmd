@@ -1,0 +1,59 @@
+---
+title: "Other: How Much Physical Art Has Been Used"
+execute:
+  echo: false
+  message: false
+  warning: false
+---
+
+```{r}
+library(tidyverse)
+
+artbench_styles <- read_csv("data/artbench_twigma_styles.csv")
+total_physical <- sum(artbench_styles$artbench_physical_art)
+```
+
+## Physical Art Representation Across Historical Styles
+
+In the **ArtBench-10 / AI-ArtBench** dataset, **`r scales::comma(total_physical)` human-made physical artworks** are used as the foundational benchmark for traditional art. To ensure every artistic movement is equally represented without bias toward a single era, the dataset curates exactly **6,000 physical artworks** in each of **10 historical styles** from public museum and gallery archives (WikiArt, Ukiyo-e.org, and Surrealism.website).
+
+By contrast, AI-ArtBench pairs those **6,000 physical artworks per style** against **12,500 AI-generated artworks per style**—more than double the physical count in every category.
+
+```{r}
+#| label: fig-physical-usage
+#| fig-width: 8
+#| fig-height: 5
+
+artbench_styles |>
+  pivot_longer(
+    cols = c(artbench_physical_art, artbench_ai_art),
+    names_to = "art_type",
+    values_to = "artwork_count"
+  ) |>
+  mutate(
+    art_type = if_else(
+      art_type == "artbench_physical_art",
+      "Physical Art (Human-Made)",
+      "AI-Generated Art"
+    )
+  ) |>
+  ggplot(aes(x = reorder(style, artwork_count), y = artwork_count, fill = art_type)) +
+  geom_col(position = "dodge", width = 0.7) +
+  coord_flip() +
+  scale_y_continuous(labels = scales::label_comma()) +
+  scale_fill_manual(
+    values = c(
+      "Physical Art (Human-Made)" = "#2b5c8f",
+      "AI-Generated Art" = "#d95f02"
+    ),
+    name = "Category"
+  ) +
+  labs(
+    title = "Physical Art Used per Historical Style (vs. AI Benchmark)",
+    subtitle = "6,000 curated human-made artworks in each of 10 styles (60,000 total physical artworks)",
+    x = "Historical Art Style",
+    y = "Number of Artworks",
+    caption = "Source: ArtBench-10 / AI-ArtBench (Kaggle)"
+  ) +
+  theme_minimal(base_size = 12)
+```

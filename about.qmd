@@ -1,0 +1,17 @@
+---
+title: "About"
+---
+
+## Data Sources and Collection
+
+This project combines two public research datasets found in **November 2026** to compare the rise of AI-generated artwork with human-made physical artwork.
+
+### 1. TWIGMA (Zenodo)
+- **Where and when it was found:** Hosted on **Zenodo** (Record `8031785`), originally published in **2023** (NeurIPS 2023 Datasets and Benchmarks Track) by Stanford researchers Yiqun T. Chen and James Zou, and accessed for this project in November 2026.
+- **How they got the data:** The researchers collected roughly **2.2 million tweets** posted on Twitter/X between **January 2021 and March 2023** that matched generative-AI art hashtags and keywords (such as `#dalle`, `#stablediffusion`, `#midjourney`, and `#aiart`). After filtering out duplicates and non-AI images, they compiled **805,650 AI-generated artworks** along with post dates and engagement metrics (such as likes).
+
+### 2. AI-ArtBench & ArtBench-10 (Kaggle)
+- **Where and when it was found:** Hosted on **Kaggle** (*AI-ArtBench* and *ArtBench-10*), built on Peiyuan Liao et al.'s **2022** *ArtBench-10* benchmark and expanded into *AI-ArtBench* in **2023**, accessed for this project in November 2026.
+- **How they got the data:**
+  - **Physical (human-made) artworks (60,000 images):** Curated by Liao et al. (UC Berkeley and CMU) from public online art archives—primarily **WikiArt.org**, **Ukiyo-e.org** (Japanese woodblock prints), and **Surrealism.website**—cleaned and balanced to include exactly **6,000 artworks** across each of **10 historical art styles**.
+  - **AI-generated artworks (125,000 images):** Created by prompting **Latent Diffusion** and **Stable Diffusion** models to generate synthetic artworks matching those same 10 historical art styles.
