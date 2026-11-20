@@ -13,6 +13,8 @@ website:
         text: More
       - href: other.qmd
         text: Other
+      - href: fun-facts.qmd
+        text: Fun Facts
 
 format:
   html:

@@ -1,0 +1,31 @@
+---
+title: "Fun Facts"
+execute:
+  echo: false
+  message: false
+  warning: false
+---
+
+```{r}
+library(tidyverse)
+
+twigma_monthly <- read_csv("data/twigma_monthly.csv")
+artbench_styles <- read_csv("data/artbench_twigma_styles.csv")
+
+jan_2021_posts <- twigma_monthly |> filter(month == as_date("2021-01-01")) |> pull(ai_art_posts)
+mar_2023_posts <- twigma_monthly |> filter(month == as_date("2023-03-01")) |> pull(ai_art_posts)
+growth_factor <- round(mar_2023_posts / jan_2021_posts)
+total_likes <- sum(twigma_monthly$total_likes)
+```
+
+## Five Fun Facts About AI Art, Physical Art, and Our Datasets
+
+1. **AI Art Grew Nearly `r growth_factor`x in Just Two Years:** Monthly AI art posts in TWIGMA jumped from just **`r scales::comma(jan_2021_posts)`** in January 2021 to **`r scales::comma(mar_2023_posts)`** in March 2023—meaning a single month of AI art sharing produced more than **3.5 times** the entire 60,000-artwork physical benchmark.
+
+2. **Surrealism Was AI Art's Favorite Classical Style:** Among the 10 historical art movements tracked in TWIGMA, **Surrealism** appeared most often (**606 posts**)—more than eight times as often as runner-up **Renaissance** (72 posts), fitting how early AI generators excelled at dreamlike, uncanny imagery.
+
+3. **Centuries of Physical Art, Balanced to the Exact Artwork:** The **60,000 human-made artworks** in *ArtBench-10* span centuries and continents—from Japanese **Ukiyo-e** woodblock prints to **Baroque** and **Impressionism** paintings—curated to **6,000 pieces per style** so no single era outweighs another.
+
+4. **800,000+ AI Artworks Sifted from 2.2 Million Tweets:** To create **TWIGMA** (short for *Twitter Generative-AI Images*), Stanford researchers filtered roughly **2.2 million tweets** down to **805,650** verified, non-duplicate AI artworks that earned **`r scales::comma(total_likes)`** total likes across our monthly series.
+
+5. **AI-ArtBench Outnumbers Physical Art 2-to-1 on Purpose:** Researchers paired **12,500 AI-generated images** (from Latent Diffusion and Stable Diffusion) against **6,000 physical artworks** in every style (**125,000 AI vs. 60,000 physical**) specifically to train computer-vision models to tell human brushwork apart from AI pixels.
