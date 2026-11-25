@@ -4,6 +4,7 @@ project:
 website:
   title: "AI Art vs. Physical Art"
   navbar:
+    search: false
     left:
       - href: index.qmd
         text: Home
