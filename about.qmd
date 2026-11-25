@@ -2,6 +2,14 @@
 title: "About"
 ---
 
+## About the Author & Project
+
+This project was created by **Lizzie Spee**, a student at [New College of Florida](https://www.ncf.edu/).
+
+- **Email:** [e.spee30@ncf.edu](mailto:e.spee30@ncf.edu)
+- **GitHub:** [github.com/Lizzie-Spee21](https://github.com/Lizzie-Spee21)
+- **Project Repository:** [github.com/Lizzie-Spee21/art](https://github.com/Lizzie-Spee21/art)
+
 ## Data Sources and Collection
 
 This project combines two public research datasets found in **November 2026** to compare the rise of AI-generated artwork with human-made physical artwork.
